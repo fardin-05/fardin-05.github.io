@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fardin Khan | Django Back-end Developer</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/scrollreveal"></script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+
+    /* 🌈 Animated Gradient Text */
+    .text-gradient {
+      background: linear-gradient(90deg, #facc15, #a855f7, #22d3ee, #fb7185);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 400%;
+      animation: gradientMove 6s infinite alternate;
+      text-shadow: 0 0 10px rgba(250, 205, 21, 0.5),
+                   0 0 20px rgba(168, 85, 247, 0.4);
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0%; }
+      100% { background-position: 100%; }
+    }
+
+    /* 🪄 Floating Glowing Background */
+    .floating-bg { position: fixed; inset: 0; overflow: hidden; z-index: -10; }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.3;
+      animation: floaty 12s infinite ease-in-out alternate;
+    }
+    .blob:nth-child(1) { animation: floaty 12s infinite ease-in-out alternate; }
+    .blob:nth-child(2) { animation: floaty 15s infinite ease-in-out alternate-reverse; }
+    .blob:nth-child(3) { animation: floaty 10s infinite ease-in-out alternate; }
+    @keyframes floaty {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(50px, -50px) scale(1.2); }
+    }
+
+    /* 💡 Neon Glow Buttons */
+    .btn-glow {
+      border: 2px solid #facc15;
+      padding: 12px 28px;
+      border-radius: 12px;
+      color: #facc15;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+    }
+    .btn-glow:hover {
+      color: #000;
+      background: #facc15;
+      box-shadow: 0 0 20px #facc15, 0 0 40px #facc15, 0 0 80px #facc15;
+      transform: scale(1.05);
+    }
+
+    /* 📊 Scroll Progress Bar */
+    #progressBar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #facc15, #a855f7, #22d3ee);
+      width: 0%;
+      z-index: 10000;
+      transition: width 0.2s ease;
+    }
+
+    /* Cursor Spark */
+    .spark {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: radial-gradient(circle, #facc15, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: fadeOut 0.8s linear forwards;
+      z-index: 9999;
+    }
+    @keyframes fadeOut {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.5); }
+    }
+
+    /* 🌐 Responsive adjustments for blobs */
+    @media (max-width: 768px) {
+      .blob { 
+        width: 40vw !important; 
+        height: 40vw !important; 
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white transition duration-500">
+
+  <!-- Scroll Progress Bar -->
+  <div id="progressBar"></div>
+
+  <!-- Floating Glowing Background -->
+  <div class="floating-bg">
+    <div class="blob w-72 h-72 bg-purple-600 top-20 left-10"></div>
+    <div class="blob w-80 h-80 bg-yellow-400 bottom-24 right-10"></div>
+    <div class="blob w-64 h-64 bg-sky-400 top-1/2 left-1/2"></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 w-full backdrop-blur bg-gray-900/70 text-gray-200 z-50 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center px-6 py-4 flex-wrap">
+      <h1 class="text-xl font-bold text-purple-400">Fardin Khan</h1>
+      <div class="flex items-center space-x-4 sm:space-x-6 mt-2 sm:mt-0 flex-wrap">
+        <a href="#skills" class="hover:text-yellow-400">Skills</a>
+        <a href="#projects" class="hover:text-yellow-400">Projects</a>
+        <a href="#about" class="hover:text-yellow-400">About</a>
+        <a href="#resume" class="hover:text-yellow-400">Resume</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="h-screen flex flex-col items-center justify-center text-center px-4">
+    <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between mt-20 md:mt-24">
+      <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
+         <p class="text-base md:text-lg text-gray-400 max-w-lg mb-10">
+          Wellcome To My Portfolio, My Name is
+        </p>
+        <h1 class="text-5xl md:text-7xl font-extrabold text-gradient mb-4">Fardin Khan</h1>
+        <h2 class="text-xl md:text-3xl text-blue-200 mb-6">Django Back-end Developer</h2>
+        <p class="text-base md:text-lg text-gray-400 max-w-lg mb-10">
+          Believes in building secure and scalable APIs for modern web apps.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+          <a href="#projects" class="btn-glow">🚀 See My Projects</a>
+          <a href="#resume" class="btn-glow">📄 View Resume</a>
+        </div>
+      </div>
+
+      <div class="md:w-1/2 flex justify-center">
+        <img src="images/poortfooli2.jpg" alt="Fardin Khan" class="rounded-2xl shadow-2xl border-4 border-gray-700 w-64 md:w-96">
+      </div>
+    </div>
+  </header>
+
+  <!-- Skills -->
+  <section id="skills" class="py-20 bg-gradient-to-b from-gray-800 to-gray-900">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-green-400">💻 My Skills</h2>
+      <div class="text-center">
+        <h3 class="text-lg md:text-xl font-semibold mb-6 text-gray-200">Back-end Languages & Frameworks</h3>
+        <div class="flex flex-wrap justify-center gap-3">
+          <span class="bg-green-200 text-green-900 px-4 py-2 rounded-full font-semibold">Python</span>
+          <span class="bg-green-200 text-green-900 px-4 py-2 rounded-full font-semibold">Django</span>
+          <span class="bg-green-200 text-green-900 px-4 py-2 rounded-full font-semibold">DRF</span>
+          <span class="bg-blue-200 text-blue-900 px-4 py-2 rounded-full font-semibold">Java</span>
+          <span class="bg-blue-200 text-blue-900 px-4 py-2 rounded-full font-semibold">C</span>
+          <span class="bg-yellow-200 text-yellow-900 px-4 py-2 rounded-full font-semibold">HTML</span>
+          <span class="bg-yellow-200 text-yellow-900 px-4 py-2 rounded-full font-semibold">Tailwind CSS</span>
+          <span class="bg-pink-200 text-pink-900 px-4 py-2 rounded-full font-semibold">MySQL</span>
+          <span class="bg-indigo-200 text-indigo-900 px-4 py-2 rounded-full font-semibold">PostgreSQL</span>
+          <span class="bg-red-200 text-red-900 px-4 py-2 rounded-full font-semibold">SQLite3</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="py-20 bg-gray-100 text-gray-900">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">🚧 My Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
+          <h3 class="text-xl md:text-2xl font-semibold mb-3 text-gray-900">Django CRUD API</h3>
+          <p class="text-gray-600 mb-4"> CRUD operations using DRF.</p>
+          <a href="https://github.com/fardin-05/Django" target="_blank" class="text-yellow-600 hover:text-yellow-700 font-semibold">🔗 View GitHub</a>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
+          <h3 class="text-xl md:text-2xl font-semibold mb-3 text-gray-900">JWT Authentication</h3>
+          <p class="text-gray-600 mb-4">Authentication built with Django REST Framework.</p>
+          <a href="https://github.com/fardin-05/JWT-Authentication" target="_blank" class="text-yellow-600 hover:text-yellow-700 font-semibold">🔗 View GitHub</a>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
+          <h3 class="text-xl md:text-2xl font-semibold mb-3 text-gray-900">E-commerce REST API</h3>
+          <p class="text-gray-600 mb-4">Complete backend for e-commerce (Cart, Product, Order).</p>
+          <a href="#" class="text-yellow-600 hover:text-yellow-700 font-semibold">🔗 Coming Soon</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-20 bg-white text-gray-900">
+    <div class="container mx-auto px-6 flex flex-col md:flex-row items-center md:space-x-8">
+      <div class="md:w-1/3 mb-8 md:mb-0">
+        <img src="images/portfoolio logo.jpg" alt="Fardin Khan" class="rounded-full w-48 h-48 mx-auto object-cover shadow-lg border-4 border-yellow-400">
+      </div>
+      <div class="md:w-2/3 text-center md:text-left">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">আমার সম্পর্কে</h2>
+        <p class="text-base md:text-lg mb-4">
+          আমি ইউজারদের জন্য অদৃশ্য কিন্তু গুরুত্বপূর্ণ আর্কিটেকচার তৈরি করতে ভালোবাসি। বিশেষ করে <strong>Django</strong>-এর শক্তি ও নিরাপত্তা আমাকে অনুপ্রাণিত করে। ক্লিন কোড, টেস্টিং এবং স্কেলেবল সিস্টেম আমার কাজের মূল ফোকাস।
+        </p>
+        <p class="text-base md:text-lg">
+          আমি এমন একটি টিমে কাজ করতে চাই যেখানে <strong>Django/Python</strong> দিয়ে বড় প্রজেক্টের backend design করতে পারব।
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resume -->
+  <section id="resume" class="py-20 bg-gray-900 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-green-400">📄 My Resume</h2>
+    <p class="text-gray-400 mb-8 text-base md:text-lg">Want to explore my experience and education in detail?</p>
+    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+      <a href="images/Fardin_Khan_Resume.pdf" target="_blank" class="btn-glow">⬇️ Download CV (PDF)</a>
+      <a href="images/Fardin_Khan_Resume.pdf" target="_blank" class="btn-glow">🔍 View Online</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-6 bg-gray-800 text-center text-gray-400">
+    <div>© 2025 Fardin Khan | All Rights Reserved</div>
+    <div class="flex justify-center space-x-6 mt-3 flex-wrap">
+      <a href="https://github.com/fardin-05" target="_blank" class="hover:text-white">GitHub</a>
+      <a href="https://www.linkedin.com/in/fardin-khan-7726062a9/" target="_blank" class="hover:text-white">LinkedIn</a>
+      <a href="mailto:fardinazim7@gmail.com" class="hover:text-white">Email</a>
+    </div>
+  </footer>
+
+  <!-- JS: Scroll Progress -->
+  <script>
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (scrollTop / height) * 100;
+      document.getElementById("progressBar").style.width = scrolled + "%";
+    });
+  </script>
+
+  <!-- JS: Scroll Reveal -->
+  <script>
+    ScrollReveal().reveal('section', {
+      delay: 200,
+      distance: '80px',
+      origin: 'bottom',
+      duration: 1000,
+      easing: 'ease-in-out',
+      reset: true
+    });
+  </script>
+
+  <!-- JS: Responsive Cursor Spark -->
+  <script>
+    function createSpark(x, y) {
+      const spark = document.createElement('div');
+      spark.classList.add('spark');
+
+      const colors = ['#facc15', '#a855f7', '#22d3ee', '#fb7185'];
+      spark.style.background = `radial-gradient(circle, ${colors[Math.floor(Math.random()*colors.length)]}, transparent 70%)`;
+
+      spark.style.left = x + 'px';
+      spark.style.top = y + 'px';
+
+      document.body.appendChild(spark);
+      setTimeout(() => spark.remove(), 800);
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      createSpark(e.pageX, e.pageY);
+    });
+
+    document.addEventListener('touchmove', (e) => {
+      for (let i = 0; i < e.touches.length; i++) {
+        createSpark(e.touches[i].pageX, e.touches[i].pageY);
+      }
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
