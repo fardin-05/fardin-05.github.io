@@ -461,7 +461,7 @@
   </footer>
 
   <!-- JS: Scroll Progress -->
-  <script>
+<script>
     window.addEventListener('scroll', () => {
       const scrollTop = document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -517,21 +517,6 @@
   });
 </script>
 <script>
-  const logo = document.getElementById('logo');
-  const info = document.getElementById('logo-info');
-
-  logo.addEventListener('click', () => {
-    info.classList.toggle('hidden');
-  });
-
-  // Optional: click outside to hide
-  document.addEventListener('click', (e) => {
-    if (!document.getElementById('logo-container').contains(e.target)) {
-      info.classList.add('hidden');
-    }
-  });
-</script>
-  <script>
   // Logo info toggle (for all screens)
   const logo = document.getElementById('logo');
   const info = document.getElementById('logo-info');
@@ -559,5 +544,7 @@
   animation: fadeIn 0.3s ease-in-out;
 }
 </style>
+
 </body>
 </html>
+
