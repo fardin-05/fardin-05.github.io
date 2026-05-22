@@ -4,14 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fardin Khan | Django Backend Developer</title>
-  <!-- ✅ AOS Animation Library -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/scrollreveal"></script>
 
   <style>
     html { scroll-behavior: smooth; }
+
+    /* ===== GLOBAL BACKGROUND - softer dark, not too purple ===== */
+    body {
+      background: linear-gradient(135deg, #0d0d1a, #1a1830, #131320);
+      min-height: 100vh;
+    }
+    section, header, footer, nav {
+      background: transparent !important;
+    }
+    .glass-section {
+      background: rgba(255,255,255,0.03) !important;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .glass-light {
+      background: rgba(255,255,255,0.05) !important;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
 
     /* 🌈 Animated Gradient Text */
     .text-gradient {
@@ -20,22 +37,17 @@
       -webkit-text-fill-color: transparent;
       background-size: 400%;
       animation: gradientMove 6s infinite alternate;
-      text-shadow: 0 0 10px rgba(250, 205, 21, 0.5),
-                   0 0 20px rgba(168, 85, 247, 0.4);
     }
     @keyframes gradientMove {
       0% { background-position: 0%; }
       100% { background-position: 100%; }
     }
 
-    /* 🪄 Floating Glowing Background */
+    /* 🪄 Floating Glowing Background - reduced opacity for softer look */
     .floating-bg { position: fixed; inset: 0; overflow: hidden; z-index: -10; }
     .blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.3;
-      animation: floaty 12s infinite ease-in-out alternate;
+      position: absolute; border-radius: 50%;
+      filter: blur(90px); opacity: 0.13;
     }
     .blob:nth-child(1) { animation: floaty 12s infinite ease-in-out alternate; }
     .blob:nth-child(2) { animation: floaty 15s infinite ease-in-out alternate-reverse; }
@@ -47,75 +59,328 @@
 
     /* 💡 Neon Glow Buttons */
     .btn-glow {
-      border: 2px solid #facc15;
-      padding: 12px 28px;
-      border-radius: 12px;
-      color: #facc15;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      position: relative;
-      display: inline-block;
+      border: 2px solid #facc15; padding: 12px 28px;
+      border-radius: 12px; color: #facc15; font-weight: bold;
+      transition: all 0.3s ease; position: relative; display: inline-block;
     }
     .btn-glow:hover {
-      color: #000;
-      background: #facc15;
+      color: #000; background: #facc15;
       box-shadow: 0 0 20px #facc15, 0 0 40px #facc15, 0 0 80px #facc15;
       transform: scale(1.05);
     }
 
     /* 📊 Scroll Progress Bar */
     #progressBar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 5px;
+      position: fixed; top: 0; left: 0; height: 5px;
       background: linear-gradient(90deg, #facc15, #a855f7, #22d3ee);
-      width: 0%;
-      z-index: 10000;
-      transition: width 0.2s ease;
+      width: 0%; z-index: 10000; transition: width 0.2s ease;
     }
 
-    /* Cursor Spark */
+    /* ✨ Cursor Spark */
     .spark {
-      position: fixed;
-      width: 8px;
-      height: 8px;
-      background: radial-gradient(circle, #facc15, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-      animation: fadeOut 0.8s linear forwards;
-      z-index: 9999;
+      position: fixed; width: 8px; height: 8px;
+      border-radius: 50%; pointer-events: none;
+      animation: fadeOut 0.8s linear forwards; z-index: 9999;
     }
     @keyframes fadeOut {
       0% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: scale(0.5); }
+      100% { opacity: 0; transform: scale(0.3); }
     }
 
-    /* 🌐 Responsive adjustments for blobs */
     @media (max-width: 768px) {
-      .blob { 
-        width: 40vw !important; 
-        height: 40vw !important; 
-      }
+      .blob { width: 40vw !important; height: 40vw !important; }
     }
-    @keyframes glowPulse {
-  0%, 100% {
-    box-shadow: 0 0 15px rgba(255,255,255,0.1), 0 0 30px rgba(255,255,255,0.05);
-  }
-  50% {
-    box-shadow: 0 0 25px rgba(255,255,255,0.25), 0 0 45px rgba(255,255,255,0.15);
-  }
-}
 
-.animate-glowPulse {
-  animation: glowPulse 3s ease-in-out infinite;
-}
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 15px rgba(255,255,255,0.1), 0 0 30px rgba(255,255,255,0.05); }
+      50% { box-shadow: 0 0 25px rgba(255,255,255,0.25), 0 0 45px rgba(255,255,255,0.15); }
+    }
+    .animate-glowPulse { animation: glowPulse 3s ease-in-out infinite; }
+
+    /* ===== SKILLS ===== */
+    .skill-pill {
+      position: relative; padding: 20px 40px; border-radius: 24px;
+      font-weight: 600; color: #fff;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 0 20px rgba(255,255,255,0.07);
+      transition: all 0.5s; cursor: pointer; display: inline-block;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    .skill-pill:hover { transform: scale(1.1) translateY(-8px); }
+
+    /* ===== PROJECTS ===== */
+    .project-card {
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      overflow: hidden; cursor: pointer; position: relative;
+      transition: transform 0.35s, box-shadow 0.35s;
+      color: #fff;
+    }
+    .project-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      border-color: rgba(255,255,255,0.25);
+    }
+    .project-card .card-glow {
+      position: absolute; inset: -2px; border-radius: 26px;
+      opacity: 0; z-index: 0; filter: blur(18px); transition: opacity 0.4s;
+    }
+    .project-card:hover .card-glow { opacity: 0.35; }
+    .card-visual { padding: 16px 18px 0 18px; position: relative; z-index: 1; }
+    .card-body { padding: 12px 18px 6px 18px; position: relative; z-index: 1; }
+    .card-title { font-size: 1.05rem; font-weight: 800; margin-bottom: 3px; color: #fff; }
+    .card-category { font-size: 0.7rem; color: rgba(255,255,255,0.5); font-weight: 600; margin-bottom: 7px; }
+    .card-desc { font-size: 0.85rem; color: rgba(255,255,255,0.75); line-height: 1.55; margin-bottom: 10px; }
+
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 18px 12px 18px; position: relative; z-index: 1; }
+    .tag {
+      font-size: 0.68rem; font-weight: 700; padding: 3px 10px;
+      border-radius: 999px; letter-spacing: 0.04em;
+      border: 1.5px solid transparent; cursor: default;
+      transition: transform 0.2s;
+      animation: tagGlow 2.8s ease-in-out infinite alternate;
+    }
+    .tag:hover { transform: scale(1.13); }
+    @keyframes tagGlow {
+      0% { box-shadow: 0 0 3px currentColor; }
+      100% { box-shadow: 0 0 10px currentColor, 0 0 20px currentColor; }
+    }
+    .tag-purple { background:rgba(168,85,247,0.2); color:#c084fc; border-color:#a855f7; }
+    .tag-green  { background:rgba(16,185,129,0.2); color:#6ee7b7; border-color:#10b981; }
+    .tag-blue   { background:rgba(59,130,246,0.2); color:#93c5fd; border-color:#3b82f6; }
+    .tag-yellow { background:rgba(250,204,21,0.2); color:#fde68a; border-color:#facc15; }
+    .tag-pink   { background:rgba(244,114,182,0.2); color:#f9a8d4; border-color:#f472b6; }
+    .tag-sky    { background:rgba(56,189,248,0.2); color:#7dd3fc; border-color:#38bdf8; }
+    .tag-red    { background:rgba(248,113,113,0.2); color:#fca5a5; border-color:#f87171; }
+    .tag-orange { background:rgba(251,146,60,0.2); color:#fdba74; border-color:#fb923c; }
+
+    .card-links-row { padding: 0 18px 14px 18px; display: flex; gap: 8px; flex-wrap: wrap; position: relative; z-index: 1; }
+    .clk { font-size: 0.75rem; font-weight: 700; padding: 5px 14px; border-radius: 8px; text-decoration: none; transition: all 0.2s; }
+    .clk-gh { background: rgba(255,255,255,0.1); color: #e5e7eb; border: 1px solid rgba(255,255,255,0.2); }
+    .clk-gh:hover { background: rgba(255,255,255,0.2); }
+    .clk-live { background: #facc15; color: #1f2937; }
+    .clk-live:hover { background: #fbbf24; box-shadow: 0 0 12px #facc1588; transform: scale(1.05); }
+
+    .view-hint { font-size:0.68rem; color:rgba(196,181,253,0.8); font-weight:600; padding: 0 18px 8px 18px; position:relative; z-index:1; }
+
+    /* ===== MODAL ===== */
+    #project-modal {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
+      z-index: 9000; align-items: center; justify-content: center; padding: 16px;
+    }
+    #project-modal.open { display: flex; }
+    .modal-box {
+      background: rgba(20,18,50,0.97);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 24px; max-width: 560px; width: 100%;
+      max-height: 90vh; overflow-y: auto; position: relative;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+      animation: modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      color: #fff;
+    }
+    @keyframes modalIn {
+      from { opacity:0; transform: scale(0.88) translateY(30px); }
+      to   { opacity:1; transform: scale(1) translateY(0); }
+    }
+    .modal-close {
+      position: absolute; top: 14px; right: 18px;
+      background: rgba(255,255,255,0.1); border: none; border-radius: 50%;
+      width: 34px; height: 34px; font-size: 1.2rem; cursor: pointer; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s; z-index: 10;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.2); }
+    .modal-header { padding: 28px 28px 0 28px; }
+    .modal-body { padding: 0 28px 28px 28px; }
+    .modal-title { font-size: 1.4rem; font-weight: 900; margin-bottom: 4px; }
+    .modal-category { font-size: 0.78rem; color: rgba(255,255,255,0.5); font-weight: 600; margin-bottom: 14px; }
+    .modal-desc { font-size: 0.92rem; color: rgba(255,255,255,0.8); line-height: 1.65; margin-bottom: 16px; }
+    .modal-stats { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+    .modal-stat {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px; padding: 8px 16px;
+      font-size: 0.82rem; font-weight: 700; color: #e5e7eb;
+    }
+    .modal-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+    .modal-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 22px; border-radius: 10px; font-size: 0.85rem; font-weight: 700;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .ml-gh { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+    .ml-gh:hover { background: rgba(255,255,255,0.2); }
+    .ml-live { background: #facc15; color: #1f2937; }
+    .ml-live:hover { background: #fbbf24; box-shadow: 0 0 16px #facc1588; }
+
+    /* ===== ABOUT / CONTACT / EDUCATION cards ===== */
+    .glass-card {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+    }
+
+    /* ===== EDUCATION - Iconic & Stylish ===== */
+    .edu-timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+    .edu-timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, #facc15, #a855f7, #22d3ee);
+      border-radius: 999px;
+    }
+    .edu-card {
+      position: relative;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 20px;
+      padding: 28px 28px 24px 28px;
+      transition: all 0.4s ease;
+      overflow: hidden;
+    }
+    .edu-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(250,204,21,0.05), rgba(168,85,247,0.05));
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .edu-card:hover::before { opacity: 1; }
+    .edu-card:hover {
+      border-color: rgba(250,204,21,0.35);
+      transform: translateX(6px);
+      box-shadow: -4px 0 30px rgba(250,204,21,0.12), 0 8px 40px rgba(0,0,0,0.3);
+    }
+    .edu-dot {
+      position: absolute;
+      left: -44px;
+      top: 28px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #facc15, #fb923c);
+      box-shadow: 0 0 0 4px rgba(250,204,21,0.2), 0 0 16px rgba(250,204,21,0.5);
+      animation: dotPulse 2.5s ease-in-out infinite;
+      z-index: 2;
+    }
+    @keyframes dotPulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(250,204,21,0.2), 0 0 16px rgba(250,204,21,0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(250,204,21,0.1), 0 0 28px rgba(250,204,21,0.6); }
+    }
+    .edu-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .edu-badge-diploma {
+      background: rgba(168,85,247,0.15);
+      color: #c084fc;
+      border: 1px solid rgba(168,85,247,0.4);
+    }
+    .edu-badge-internship {
+      background: rgba(34,211,238,0.15);
+      color: #67e8f9;
+      border: 1px solid rgba(34,211,238,0.4);
+    }
+    .edu-badge-ssc {
+      background: rgba(250,204,21,0.15);
+      color: #fde68a;
+      border: 1px solid rgba(250,204,21,0.4);
+    }
+    .edu-icon {
+      font-size: 2rem;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .edu-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+    .edu-institute {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      font-style: italic;
+      margin-bottom: 4px;
+    }
+    .edu-period {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #facc15;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .edu-desc {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.65;
+    }
+    .edu-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+    .edu-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+    }
+
+    /* Contact form */
+    .contact-input {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; border-radius: 10px; padding: 12px;
+      width: 100%; outline: none; transition: border 0.2s;
+    }
+    .contact-input::placeholder { color: rgba(255,255,255,0.4); }
+    .contact-input:focus { border-color: #facc15; }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    .animate-fadeIn { animation: fadeIn 0.3s ease-in-out; }
+
+    .section-title { color: #fff; }
+    .section-sub { color: rgba(255,255,255,0.55); }
   </style>
 </head>
 
-<body class="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white transition duration-500">
+<body class="text-white transition duration-500">
 
-  <!-- Scroll Progress Bar -->
   <div id="progressBar"></div>
 
   <!-- Floating Glowing Background -->
@@ -126,512 +391,692 @@
   </div>
 
   <!-- Navbar -->
- <nav class="fixed top-0 left-0 w-full bg-gray-800/50 backdrop-blur-md z-50 transition-all duration-300">
-  <div class="container mx-auto flex justify-between items-center px-6 py-4 flex-wrap">
-    
-    <!-- Logo + Info -->
-    <div class="relative" id="logo-container">
-      <h1 class="text-xl font-bold text-purple-400 cursor-pointer flex items-center" id="logo">
-        Fardin Khan
-      </h1>
-      <div class="absolute top-12 left-0 bg-gray-800 text-white px-4 py-2 rounded-xl shadow-lg hidden transition-all duration-300 ease-in-out" id="logo-info">
-        <p class="font-semibold text-purple-300">Fardin Khan</p>
-        <p class="text-sm text-gray-300">fardinazim7@gmail.com</p>
+  <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-300" style="background:rgba(10,9,28,0.65);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.08)">
+    <div class="container mx-auto flex justify-between items-center px-6 py-4 flex-wrap">
+      <div class="relative" id="logo-container">
+        <h1 class="text-xl font-bold text-purple-400 cursor-pointer flex items-center" id="logo">Fardin Khan</h1>
+        <div class="absolute top-12 left-0 text-white px-4 py-2 rounded-xl shadow-lg hidden transition-all duration-300 ease-in-out glass-card" id="logo-info">
+          <p class="font-semibold text-purple-300">Fardin Khan</p>
+          <p class="text-sm" style="color:rgba(255,255,255,0.6)">fardinazim7@gmail.com</p>
+        </div>
+      </div>
+      <button id="menu-btn" class="block sm:hidden focus:outline-none text-white hover:text-green-400 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+      <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-60 z-40"></div>
+      <div id="menu" class="hidden w-full sm:flex sm:w-auto flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-6 mt-4 sm:mt-0 text-center p-6 sm:p-0">
+        <a href="#skills" class="text-green-400 hover:text-purple-400 transition">Skills</a>
+        <a href="#projects" class="text-green-400 hover:text-purple-400 transition">Projects</a>
+        <a href="#about" class="text-green-400 hover:text-purple-400 transition">About</a>
+        <a href="#resume" class="text-green-400 hover:text-purple-400 transition">Resume</a>
+        <a href="#education" class="text-green-400 hover:text-purple-400 transition">Education</a>
+        <a href="#contact" class="text-green-400 hover:text-purple-400 transition">Hire Me</a>
       </div>
     </div>
-
-    <!-- Hamburger Button (mobile only) -->
-    <button id="menu-btn" class="block sm:hidden focus:outline-none text-black-200 hover:text-green-400 transition">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-      </svg>
-    </button>
-
-    <!-- Menu Links -->
-    <div id="menu" class="hidden w-full sm:flex sm:w-auto flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-6 mt-4 sm:mt-0 text-center">
-      <a href="#skills" class="text-green-400 hover:text-purple-400 transition">Skills</a>
-      <a href="#projects" class="text-green-400 hover:text-purple-400 transition">Projects</a>
-      <a href="#about" class="text-green-400 hover:text-purple-400 transition">About</a>
-      <a href="#resume" class="text-green-400 hover:text-purple-400 transition">Resume</a>
-      <a href="#education" class="text-green-400 hover:text-purple-400 transition">Education</a>
-      <a href="#contact" class="text-green-400 hover:text-purple-400 transition">Hire Me</a>
-
-</a>
-
-</a>
-    </div>
-  </div>
-</nav>
+  </nav>
 
   <!-- Header -->
   <header class="h-screen flex flex-col items-center justify-center text-center px-4">
     <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between mt-20 md:mt-24">
       <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
-         <p class="text-base md:text-lg text-gray-400 max-w-lg mb-10">
-          Welcome to my world of code
-        </p>
+        <p class="text-base md:text-lg mb-10" style="color:rgba(255,255,255,0.55)">Welcome to my world of code</p>
         <h1 class="text-5xl md:text-7xl font-extrabold text-gradient mb-4">Fardin Khan</h1>
         <h2 class="text-xl md:text-3xl text-blue-200 mb-6">Django Backend Developer</h2>
-        <p class="text-base md:text-lg text-gray-400 max-w-lg mb-10">
-          Believes in building secure and scalable APIs for modern web apps.
-        </p>
+        <p class="text-base md:text-lg max-w-lg mb-10" style="color:rgba(255,255,255,0.55)">Believes in building secure and scalable APIs for modern web apps.</p>
         <div class="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
           <a href="#projects" class="btn-glow">🚀 See My Projects</a>
           <a href="images/Fardin_Khan_Resume.pdf" class="btn-glow">📄 View Resume</a>
         </div>
       </div>
-
       <div class="md:w-1/2 flex justify-center">
-        <img src="images/poortfooli2.jpg" alt="Fardin Khan" class="rounded-2xl shadow-2xl border-4 border-gray-700 w-64 md:w-96">
+        <img src="images/poortfooli2.jpg" alt="Fardin Khan" class="rounded-2xl shadow-2xl border-4 w-64 md:w-96" style="border-color:rgba(255,255,255,0.15)">
       </div>
     </div>
   </header>
 
   <!-- Skills -->
- <section id="skills" class="py-20 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden">
-  <div class="container mx-auto px-6">
-    <h2 class="text-4xl font-bold text-center mb-12 text-blue-400 tracking-wider ">💻 Skills </h2>
+  <section id="skills" class="py-20 glass-section">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-12 text-blue-400 tracking-wider">💻 Skills</h2>
+      <div class="flex flex-wrap justify-center gap-6">
 
-    <div class="flex flex-wrap justify-center gap-6">
-
-  <!-- Skill Template -->
-  <div class="group relative flex flex-col items-center">
-    <span class="relative px-10 py-5 rounded-3xl font-semibold text-white bg-gray-800 
-      shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all duration-500 hover:scale-110 
-      hover:-translate-y-2 cursor-pointer overflow-hidden before:absolute before:inset-0 
-      before:rounded-3xl before:bg-gradient-to-r before:from-yellow-400 before:via-pink-500 
-      before:to-purple-600 before:opacity-20 before:blur-2xl animate-glowPulse">
-      Python
-    </span>
-    <div class="absolute opacity-0 group-hover:opacity-100 -top-12 bg-yellow-400 text-gray-900 
-      px-3 py-1 rounded-full shadow-lg text-sm font-semibold transition-all duration-300 z-50 flex items-center">
-      <span>Expertise: 90%</span>
-      <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 
-        border-t-8 border-l-transparent border-r-transparent border-t-yellow-400"></div>
-    </div>
-  </div>
-
-  <!-- Django -->
- <div class="group relative flex flex-col items-center">
-    <span class="relative px-10 py-5 rounded-3xl font-semibold text-white bg-gray-800 
-      shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all duration-500 hover:scale-110 
-      hover:-translate-y-2 cursor-pointer overflow-hidden before:absolute before:inset-0 
-      before:rounded-3xl before:bg-gradient-to-r before:from-yellow-400 before:via-pink-500 
-      before:to-purple-600 before:opacity-20 before:blur-2xl animate-glowPulse">
-      Django
-    </span>
-    <div class="absolute opacity-0 group-hover:opacity-100 -top-12 bg-yellow-400 text-gray-900 
-      px-3 py-1 rounded-full shadow-lg text-sm font-semibold transition-all duration-300 z-50 flex items-center">
-      <span>Expertise: 85%</span>
-      <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 
-        border-t-8 border-l-transparent border-r-transparent border-t-yellow-400"></div>
-    </div>
-  </div>
-
- <div class="group relative flex flex-col items-center">
-    <span class="relative px-10 py-5 rounded-3xl font-semibold text-white bg-gray-800 
-      shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all duration-500 hover:scale-110 
-      hover:-translate-y-2 cursor-pointer overflow-hidden before:absolute before:inset-0 
-      before:rounded-3xl before:bg-gradient-to-r before:from-yellow-400 before:via-pink-500 
-      before:to-purple-600 before:opacity-20 before:blur-2xl animate-glowPulse">
-      Java
-    </span>
-    <div class="absolute opacity-0 group-hover:opacity-100 -top-12 bg-yellow-400 text-gray-900 
-      px-3 py-1 rounded-full shadow-lg text-sm font-semibold transition-all duration-300 z-50 flex items-center">
-      <span>Expertise: 80%</span>
-      <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 
-        border-t-8 border-l-transparent border-r-transparent border-t-yellow-400"></div>
-    </div>
-  </div>
- <!-- C -->
-  <div class="group relative flex flex-col items-center">
-    <span class="relative px-10 py-5 rounded-3xl font-semibold text-white bg-gray-800 
-      shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all duration-500 hover:scale-110 
-      hover:-translate-y-2 cursor-pointer overflow-hidden before:absolute before:inset-0 
-      before:rounded-3xl before:bg-gradient-to-r before:from-yellow-400 before:via-pink-500 
-      before:to-purple-600 before:opacity-20 before:blur-2xl animate-glowPulse">
-      C
-    </span>
-    <div class="absolute opacity-0 group-hover:opacity-100 -top-12 bg-yellow-400 text-gray-900 
-      px-3 py-1 rounded-full shadow-lg text-sm font-semibold transition-all duration-300 z-50 flex items-center">
-      <span>Expertise: 75%</span>
-      <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 
-        border-t-8 border-l-transparent border-r-transparent border-t-yellow-400"></div>
-    </div>
-  </div>
-
-  <!-- HTML -->
-  <div class="group relative flex flex-col items-center">
-    <span class="relative px-10 py-5 rounded-3xl font-semibold text-white bg-gray-800 
-      shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all duration-500 hover:scale-110 
-      hover:-translate-y-2 cursor-pointer overflow-hidden before:absolute before:inset-0 
-      before:rounded-3xl before:bg-gradient-to-r before:from-green-400 before:via-blue-300 
-      before:to-teal-400 before:opacity-20 before:blur-2xl animate-glowPulse">
-      HTML
-    </span>
-    <div class="absolute opacity-0 group-hover:opacity-100 -top-12 bg-green-400 text-gray-900 
-      px-3 py-1 rounded-full shadow-lg text-sm font-semibold transition-all duration-300 z-50 flex items-center">
-      <span>Expertise: 95%</span>
-      <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 
-        border-t-8 border-l-transparent border-r-transparent border-t-green-400"></div>
-    </div>
-  </div>
-
-  <!-- Tailwind CSS -->
- <div class="group relative flex flex-col items-center">
-    <span class="relative px-10 py-5 rounded-3xl font-semibold text-white bg-gray-800 
-      shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all duration-500 hover:scale-110 
-      hover:-translate-y-2 cursor-pointer overflow-hidden before:absolute before:inset-0 
-      before:rounded-3xl before:bg-gradient-to-r before:from-green-400 before:via-blue-300 
-      before:to-teal-400 before:opacity-20 before:blur-2xl animate-glowPulse">
-      Tailwind CSS
-    </span>
-    <div class="absolute opacity-0 group-hover:opacity-100 -top-12 bg-green-400 text-gray-900 
-      px-3 py-1 rounded-full shadow-lg text-sm font-semibold transition-all duration-300 z-50 flex items-center">
-      <span>Expertise: 90%</span>
-      <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 
-        border-t-8 border-l-transparent border-r-transparent border-t-green-400"></div>
-    </div>
-  </div>
-
-
-  <!-- PostgreSQL -->
- <div class="group relative flex flex-col items-center">
-    <span class="relative px-10 py-5 rounded-3xl font-semibold text-white bg-gray-800 
-      shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all duration-500 hover:scale-110 
-      hover:-translate-y-2 cursor-pointer overflow-hidden before:absolute before:inset-0 
-      before:rounded-3xl before:bg-gradient-to-r before:from-green-400 before:via-blue-300 
-      before:to-teal-400 before:opacity-20 before:blur-2xl animate-glowPulse">
-      PostgreSQL
-    </span>
-    <div class="absolute opacity-0 group-hover:opacity-100 -top-12 bg-green-400 text-gray-900 
-      px-3 py-1 rounded-full shadow-lg text-sm font-semibold transition-all duration-300 z-50 flex items-center">
-      <span>Expertise: 60%</span>
-      <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 
-        border-t-8 border-l-transparent border-r-transparent border-t-green-400"></div>
-    </div>
-  </div>
-<!--MySQL-->
-  <div class="group relative flex flex-col items-center">
-    <span class="relative px-10 py-5 rounded-3xl font-semibold text-white bg-gray-800 
-      shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all duration-500 hover:scale-110 
-      hover:-translate-y-2 cursor-pointer overflow-hidden before:absolute before:inset-0 
-      before:rounded-3xl before:bg-gradient-to-r before:from-green-400 before:via-blue-300 
-      before:to-teal-400 before:opacity-20 before:blur-2xl animate-glowPulse">
-      MySQL
-    </span>
-    <div class="absolute opacity-0 group-hover:opacity-100 -top-12 bg-green-400 text-gray-900 
-      px-3 py-1 rounded-full shadow-lg text-sm font-semibold transition-all duration-300 z-50 flex items-center">
-      <span>Expertise: 60%</span>
-      <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 
-        border-t-8 border-l-transparent border-r-transparent border-t-green-400"></div>
-    </div>
-  </div>
-  <!--SQLite-->
-<div class="group relative flex flex-col items-center">
-    <span class="relative px-10 py-5 rounded-3xl font-semibold text-white bg-gray-800 
-      shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all duration-500 hover:scale-110 
-      hover:-translate-y-2 cursor-pointer overflow-hidden before:absolute before:inset-0 
-      before:rounded-3xl before:bg-gradient-to-r before:from-green-400 before:via-blue-300 
-      before:to-teal-400 before:opacity-20 before:blur-2xl animate-glowPulse">
-      SQLite
-    </span>
-    <div class="absolute opacity-0 group-hover:opacity-100 -top-12 bg-green-400 text-gray-900 
-      px-3 py-1 rounded-full shadow-lg text-sm font-semibold transition-all duration-300 z-50 flex items-center">
-      <span>Expertise: 80%</span>
-      <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 
-        border-t-8 border-l-transparent border-r-transparent border-t-green-400"></div>
-    </div>
-  </div>
-
-</div>
-</section>
-</section>
-
-
-
-  <!-- Projects -->
-  <section id="projects" class="py-20 bg-gray-100 text-gray-900">
-  <div class="container mx-auto px-6">
-    <h2 class="text-4xl font-bold text-center mb-12 text-purple-600 tracking-wide animate-pulse">🚧 Projects </h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      
-      <!-- Project Card -->
-      <div class="relative group bg-white rounded-3xl shadow-2xl p-6 transform transition-all duration-500 hover:-translate-y-5 hover:scale-105 cursor-pointer overflow-hidden">
-        <div class="absolute -inset-1 bg-gradient-to-r from-purple-400 via-pink-300 to-purple-400 opacity-30 blur-2xl rounded-3xl group-hover:opacity-60 transition-all duration-500"></div>
-        <h3 class="text-2xl font-bold mb-3 relative z-10 text-purple-700 group-hover:text-purple-900 transition-colors duration-500">Django CRUD API</h3>
-        <p class="text-gray-700 mb-4 relative z-10">CRUD operations built using Django REST Framework with secure endpoints.</p>
-        <a href="https://github.com/fardin-05/Django" target="_blank" class="text-yellow-600 hover:text-yellow-700 font-semibold relative z-10">🔗 View GitHub</a>
-      </div>
-
-      <div class="relative group bg-white rounded-3xl shadow-2xl p-6 transform transition-all duration-500 hover:-translate-y-5 hover:scale-105 cursor-pointer overflow-hidden">
-        <div class="absolute -inset-1 bg-gradient-to-r from-green-400 via-blue-300 to-green-400 opacity-30 blur-2xl rounded-3xl group-hover:opacity-60 transition-all duration-500"></div>
-        <h3 class="text-2xl font-bold mb-3 relative z-10 text-green-700 group-hover:text-green-900 transition-colors duration-500">JWT Authentication</h3>
-        <p class="text-gray-700 mb-4 relative z-10">Secure authentication system built with Django REST Framework and JWT tokens.</p>
-        <a href="https://github.com/fardin-05/JWT-Authentication" target="_blank" class="text-yellow-600 hover:text-yellow-700 font-semibold relative z-10">🔗 View GitHub</a>
-      </div>
-
-      <div class="relative group bg-white rounded-3xl shadow-2xl p-6 transform transition-all duration-500 hover:-translate-y-5 hover:scale-105 cursor-pointer overflow-hidden">
-        <div class="absolute -inset-1 bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-400 opacity-30 blur-2xl rounded-3xl group-hover:opacity-60 transition-all duration-500"></div>
-        <h3 class="text-2xl font-bold mb-3 relative z-10 text-blue-700 group-hover:text-blue-900 transition-colors duration-500">Library Management API</h3>
-        <p class="text-gray-700 mb-4 relative z-10"> A Django REST Framework–based backend project that manages authors, books, categories, and borrowing records.</p>
-        <a href="https://github.com/fardin-05/Library_Management_System" target="_blank" class="text-yellow-600 hover:text-yellow-700 font-semibold relative z-10">🔗 View GitHub</a>
-      </div>
-      
-     <div class="relative group bg-white rounded-3xl shadow-2xl p-6 transform transition-all duration-500 hover:-translate-y-5 hover:scale-105 cursor-pointer overflow-hidden">
-        <div class="absolute -inset-1 bg-gradient-to-r from-blue-400 via-indigo-300 to-red-400 opacity-30 blur-2xl rounded-3xl group-hover:opacity-60 transition-all duration-500"></div>
-        <h3 class="text-2xl font-bold mb-3 relative z-10 text-blue-700 group-hover:text-red-900 transition-colors duration-500">E-commerce REST API</h3>
-        <p class="text-gray-700 mb-4 relative z-10">Complete backend for e-commerce (Cart, Product, Order). In the future, this project will integrate a payment gateway using STRIPE or SSL.</p>
-        <a href="https://github.com/fardin-05/Phimart" target="_blank" class="text-yellow-600 hover:text-yellow-700 font-semibold relative z-10">🔗 View GitHub</a>
-        <a href="https://phimart-chi.vercel.app/api/auth/" target="_blank" class="text-yellow-600 hover:text-yellow-700 font-semibold relative z-10">🔗 View Live Project</a>
-      </div>
-      
-       <div class="relative group bg-white rounded-3xl shadow-2xl p-6 transform transition-all duration-500 hover:-translate-y-5 hover:scale-105 cursor-pointer overflow-hidden">
-        <div class="absolute -inset-1 bg-gradient-to-r from-purple-400 via-pink-300 to-purple-400 opacity-30 blur-2xl rounded-3xl group-hover:opacity-60 transition-all duration-500"></div>
-        <h3 class="text-2xl font-bold mb-3 relative z-10 text-purple-700 group-hover:text-purple-900 transition-colors duration-500">Django Blog Web.</h3>
-        <p class="text-gray-700 mb-4 relative z-10">Admin or writers can create, edit, and delete posts.Users enjoy a clean and engaging interface.This is a basic blog site that will become more advanced in the future.</p>
-        <a href="https://github.com/fardin-05/Blog" target="_blank" class="text-yellow-600 hover:text-yellow-700 font-semibold relative z-10">🔗 View GitHub</a>
-        <a href="https://blog-18kw.onrender.com" target="_blank" class="text-yellow-600 hover:text-yellow-700 font-semibold relative z-10">🔗 View Live Project</a>
-      </div>
-      
-      <div class="relative group bg-white rounded-3xl shadow-2xl p-6 transform transition-all duration-500 hover:-translate-y-5 hover:scale-105 cursor-pointer overflow-hidden">
-        <div class="absolute -inset-1 bg-gradient-to-r from-green-400 via-blue-300 to-green-400 opacity-30 blur-2xl rounded-3xl group-hover:opacity-60 transition-all duration-500"></div>
-        <h3 class="text-2xl font-bold mb-3 relative z-10 text-green-700 group-hover:text-green-900 transition-colors duration-500">Blood Bank REST API</h3>
-        <p class="text-gray-700 mb-4 relative z-10">Backend service for managing donors, blood requests, stocks, and user roles. Built with REST architecture and JWT authentication. </p>
-        <a href="https://github.com/fardin-05/Blood_Bank_Back_end" target="_blank" class="text-yellow-600 hover:text-yellow-700 font-semibold relative z-10">🔗 View GitHub</a>
-        <a href="https://blood-bank-back-end.onrender.com" target="_blank" class="text-yellow-600 hover:text-yellow-700 font-semibold relative z-10">🔗 View Live Project</a>
-      </div>
-      
-      </div>
+        <!-- Yellow group -->
+        <div class="group relative flex flex-col items-center">
+          <span class="skill-pill before:absolute before:inset-0 before:rounded-3xl before:bg-gradient-to-r before:from-yellow-400 before:via-pink-500 before:to-purple-600 before:opacity-10 before:blur-2xl">Python</span>
+          <div class="absolute opacity-0 group-hover:opacity-100 -top-12 bg-yellow-400 text-gray-900 px-3 py-1 rounded-full shadow-lg text-sm font-semibold transition-all duration-300 z-50 flex items-center">
+            <span>Expertise: 90%</span>
+            <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-yellow-400"></div>
+          </div>
         </div>
+        <div class="group relative flex flex-col items-center">
+          <span class="skill-pill before:absolute before:inset-0 before:rounded-3xl before:bg-gradient-to-r before:from-yellow-400 before:via-pink-500 before:to-purple-600 before:opacity-10 before:blur-2xl">Django</span>
+          <div class="absolute opacity-0 group-hover:opacity-100 -top-12 bg-yellow-400 text-gray-900 px-3 py-1 rounded-full shadow-lg text-sm font-semibold transition-all duration-300 z-50 flex items-center">
+            <span>Expertise: 85%</span>
+            <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-yellow-400"></div>
+          </div>
+        </div>
+        <div class="group relative flex flex-col items-center">
+          <span class="skill-pill before:absolute before:inset-0 before:rounded-3xl before:bg-gradient-to-r before:from-yellow-400 before:via-pink-500 before:to-purple-600 before:opacity-10 before:blur-2xl">Java</span>
+          <div class="absolute opacity-0 group-hover:opacity-100 -top-12 bg-yellow-400 text-gray-900 px-3 py-1 rounded-full shadow-lg text-sm font-semibold transition-all duration-300 z-50 flex items-center">
+            <span>Expertise: 80%</span>
+            <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-yellow-400"></div>
+          </div>
+        </div>
+        <div class="group relative flex flex-col items-center">
+          <span class="skill-pill before:absolute before:inset-0 before:rounded-3xl before:bg-gradient-to-r before:from-yellow-400 before:via-pink-500 before:to-purple-600 before:opacity-10 before:blur-2xl">C</span>
+          <div class="absolute opacity-0 group-hover:opacity-100 -top-12 bg-yellow-400 text-gray-900 px-3 py-1 rounded-full shadow-lg text-sm font-semibold transition-all duration-300 z-50 flex items-center">
+            <span>Expertise: 75%</span>
+            <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-yellow-400"></div>
+          </div>
+        </div>
+
+        <!-- Green group -->
+        <div class="group relative flex flex-col items-center">
+          <span class="skill-pill before:absolute before:inset-0 before:rounded-3xl before:bg-gradient-to-r before:from-green-400 before:via-blue-300 before:to-teal-400 before:opacity-10 before:blur-2xl">HTML</span>
+          <div class="absolute opacity-0 group-hover:opacity-100 -top-12 bg-green-400 text-gray-900 px-3 py-1 rounded-full shadow-lg text-sm font-semibold transition-all duration-300 z-50 flex items-center">
+            <span>Expertise: 95%</span>
+            <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-green-400"></div>
+          </div>
+        </div>
+        <div class="group relative flex flex-col items-center">
+          <span class="skill-pill before:absolute before:inset-0 before:rounded-3xl before:bg-gradient-to-r before:from-green-400 before:via-blue-300 before:to-teal-400 before:opacity-10 before:blur-2xl">Tailwind CSS</span>
+          <div class="absolute opacity-0 group-hover:opacity-100 -top-12 bg-green-400 text-gray-900 px-3 py-1 rounded-full shadow-lg text-sm font-semibold transition-all duration-300 z-50 flex items-center">
+            <span>Expertise: 90%</span>
+            <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-green-400"></div>
+          </div>
+        </div>
+        <div class="group relative flex flex-col items-center">
+          <span class="skill-pill before:absolute before:inset-0 before:rounded-3xl before:bg-gradient-to-r before:from-green-400 before:via-blue-300 before:to-teal-400 before:opacity-10 before:blur-2xl">PostgreSQL</span>
+          <div class="absolute opacity-0 group-hover:opacity-100 -top-12 bg-green-400 text-gray-900 px-3 py-1 rounded-full shadow-lg text-sm font-semibold transition-all duration-300 z-50 flex items-center">
+            <span>Expertise: 60%</span>
+            <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-green-400"></div>
+          </div>
+        </div>
+        <div class="group relative flex flex-col items-center">
+          <span class="skill-pill before:absolute before:inset-0 before:rounded-3xl before:bg-gradient-to-r before:from-green-400 before:via-blue-300 before:to-teal-400 before:opacity-10 before:blur-2xl">SQLite</span>
+          <div class="absolute opacity-0 group-hover:opacity-100 -top-12 bg-green-400 text-gray-900 px-3 py-1 rounded-full shadow-lg text-sm font-semibold transition-all duration-300 z-50 flex items-center">
+            <span>Expertise: 80%</span>
+            <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-green-400"></div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
+
+  <!-- Projects -->
+  <section id="projects" class="py-20 glass-light">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold text-center mb-4 text-purple-400 tracking-wide">🚧 Projects</h2>
+      <p class="text-center mb-12 text-sm section-sub">Click any project card to see full details & tech stack</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Card: FRIENDSBOOK -->
+<div class="project-card" onclick="openModal('friendsbook')" data-aos="fade-up" data-aos-delay="200">
+  <div class="card-glow" style="background:linear-gradient(135deg,#3b82f6,#a855f7)"></div>
+  <div class="card-visual">
+    <div style="background:rgba(59,130,246,0.1);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:12px;">
+      <span style="font-size:1.6rem">👥</span>
+      <div style="display:flex;gap:10px">
+        <div style="text-align:center"><div style="font-size:0.6rem;color:rgba(255,255,255,0.5)">Profiles</div><div style="font-size:0.8rem;font-weight:800;color:#4ade80">✅</div></div>
+        <div style="text-align:center"><div style="font-size:0.6rem;color:rgba(255,255,255,0.5)">Feed</div><div style="font-size:0.8rem;font-weight:800;color:#4ade80">✅</div></div>
+        <div style="text-align:center"><div style="font-size:0.6rem;color:rgba(255,255,255,0.5)">Chat</div><div style="font-size:0.8rem;font-weight:800;color:#4ade80">✅</div></div>
+      </div>
     </div>
   </div>
-</section>
+  <div class="card-body">
+    <div class="card-title">Friends Book</div>
+    <div class="card-category">Social Platform · Full Backend</div>
+    <div class="card-desc">Social media backend with user profiles, personal feed/timeline, post ownership, and user messaging.</div>
+  </div>
+  <div class="tag-cloud">
+    <span class="tag tag-blue">Django</span>
+    <span class="tag tag-sky">MVT</span>
+    <span class="tag tag-orange">HTML</span>
+    <span class="tag tag-green">CSS</span>
+    <span class="tag tag-purple">JavaScript</span>
+    <span class="tag tag-red">Render</span>
+  </div>
+  <p class="view-hint">👆 Click to view details</p>
+  <div class="card-links-row" style="padding-top:10px">
+    <a href="https://github.com/fardin-05/YOUR_REPO" target="_blank" onclick="event.stopPropagation()" class="clk clk-gh">🔗 GitHub</a>
+    <a href="https://friends-book-nefr.onrender.com/" target="_blank" onclick="event.stopPropagation()" class="clk clk-live">🌐 Live</a>
+  </div>
+</div>
+
+        <!-- Card: Django Blog Website -->
+        <div class="project-card" onclick="openModal('blog')" data-aos="fade-up" data-aos-delay="0">
+          <div class="card-glow" style="background:linear-gradient(135deg,#a855f7,#ec4899)"></div>
+          <div class="card-visual">
+            <div style="background:rgba(168,85,247,0.12);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:5px;">
+              <div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;background:#a855f7;border-radius:50%"></div><div style="height:5px;background:rgba(168,85,247,0.35);border-radius:999px;flex:1"></div></div>
+              <div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;background:#ec4899;border-radius:50%"></div><div style="height:5px;background:rgba(236,72,153,0.3);border-radius:999px;width:80%"></div></div>
+              <div style="display:flex;align-items:center;gap:7px"><div style="width:8px;height:8px;background:#c084fc;border-radius:50%"></div><div style="height:5px;background:rgba(192,132,252,0.25);border-radius:999px;width:60%"></div></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Django Blog Website</div>
+            <div class="card-category">Web App · Full Stack</div>
+            <div class="card-desc">Admin/writers can create, edit, delete posts. Clean interface for readers.</div>
+          </div>
+          <div class="tag-cloud">
+            <span class="tag tag-purple">Django</span>
+            <span class="tag tag-pink">HTML/CSS</span>
+            <span class="tag tag-green">SQLite</span>
+            <span class="tag tag-red">Render</span>
+          </div>
+          <p class="view-hint">👆 Click to view details</p>
+          <div class="card-links-row" style="padding-top:10px">
+            <a href="https://github.com/fardin-05/Blog" target="_blank" onclick="event.stopPropagation()" class="clk clk-gh">🔗 GitHub</a>
+            <a href="https://blog-18kw.onrender.com/" target="_blank" onclick="event.stopPropagation()" class="clk clk-live">🌐 Live</a>
+          </div>
+        </div>
+
+        <!-- Card: E-commerce REST API -->
+        <div class="project-card" onclick="openModal('ecommerce')" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-glow" style="background:linear-gradient(135deg,#f87171,#fb923c)"></div>
+          <div class="card-visual">
+            <div style="background:rgba(251,146,60,0.1);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:12px;">
+              <span style="font-size:1.6rem">🛒</span>
+              <div style="display:flex;gap:10px">
+                <div style="text-align:center"><div style="font-size:0.6rem;color:rgba(255,255,255,0.5)">Cart</div><div style="font-size:0.8rem;font-weight:800;color:#4ade80">✅</div></div>
+                <div style="text-align:center"><div style="font-size:0.6rem;color:rgba(255,255,255,0.5)">Orders</div><div style="font-size:0.8rem;font-weight:800;color:#4ade80">✅</div></div>
+                <div style="text-align:center"><div style="font-size:0.6rem;color:rgba(255,255,255,0.5)">Payment</div><div style="font-size:0.8rem;font-weight:800;color:#fb923c">⏳</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">E-commerce REST API</div>
+            <div class="card-category">E-commerce · Full Backend</div>
+            <div class="card-desc">Complete backend (Cart, Product, Order). Payment gateway via Stripe/SSL — coming soon.</div>
+          </div>
+          <div class="tag-cloud">
+            <span class="tag tag-red">Django</span>
+            <span class="tag tag-blue">DRF</span>
+            <span class="tag tag-orange">JWT</span>
+            <span class="tag tag-sky">PostgreSQL</span>
+            <span class="tag tag-yellow">Vercel</span>
+          </div>
+          <p class="view-hint">👆 Click to view details</p>
+          <div class="card-links-row" style="padding-top:10px">
+            <a href="https://github.com/fardin-05/Phimart" target="_blank" onclick="event.stopPropagation()" class="clk clk-gh">🔗 GitHub</a>
+            <a href="https://phimart-chi.vercel.app/api/auth/" target="_blank" onclick="event.stopPropagation()" class="clk clk-live">🌐 Live</a>
+          </div>
+        </div>
+
+        <!-- Card: Blood Bank REST API -->
+        <div class="project-card" onclick="openModal('blood')" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-glow" style="background:linear-gradient(135deg,#ef4444,#06b6d4)"></div>
+          <div class="card-visual">
+            <div style="background:rgba(239,68,68,0.1);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px;">
+              <span style="font-size:1.6rem">🩸</span>
+              <div style="flex:1">
+                <div style="font-size:0.6rem;color:rgba(255,255,255,0.5);margin-bottom:4px">Blood Stock</div>
+                <div style="height:7px;background:rgba(239,68,68,0.2);border-radius:999px;overflow:hidden">
+                  <div style="height:100%;width:76%;background:linear-gradient(90deg,#ef4444,#dc2626);border-radius:999px"></div>
+                </div>
+                <div style="font-size:0.65rem;color:#fca5a5;font-weight:700;margin-top:3px">76% Stocked</div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Blood Bank REST API</div>
+            <div class="card-category">Healthcare · Backend API</div>
+            <div class="card-desc">Backend for managing donors, blood requests, stocks, and user roles. JWT authentication.</div>
+          </div>
+          <div class="tag-cloud">
+            <span class="tag tag-red">Django</span>
+            <span class="tag tag-blue">DRF</span>
+            <span class="tag tag-orange">JWT</span>
+            <span class="tag tag-sky">PostgreSQL</span>
+            <span class="tag tag-pink">Render</span>
+          </div>
+          <p class="view-hint">👆 Click to view details</p>
+          <div class="card-links-row" style="padding-top:10px">
+            <a href="https://github.com/fardin-05/Blood_Bank_Back_end" target="_blank" onclick="event.stopPropagation()" class="clk clk-gh">🔗 GitHub</a>
+            <a href="https://blood-bank-back-end.onrender.com" target="_blank" onclick="event.stopPropagation()" class="clk clk-live">🌐 Live</a>
+          </div>
+        </div>
+
+        <!-- Card: Django CRUD API -->
+        <div class="project-card" onclick="openModal('crud')" data-aos="fade-up" data-aos-delay="300">
+          <div class="card-glow" style="background:linear-gradient(135deg,#a855f7,#f472b6)"></div>
+          <div class="card-visual">
+            <div style="display:flex;align-items:flex-end;gap:4px;height:48px;background:rgba(168,85,247,0.1);border-radius:10px;padding:8px 12px;">
+              <div style="background:rgba(196,181,253,0.5);border-radius:3px;width:12px;height:35%"></div>
+              <div style="background:rgba(167,139,250,0.6);border-radius:3px;width:12px;height:55%"></div>
+              <div style="background:#7c3aed;border-radius:3px;width:12px;height:80%"></div>
+              <div style="background:#5b21b6;border-radius:3px;width:12px;height:100%"></div>
+              <div style="background:#7c3aed;border-radius:3px;width:12px;height:72%"></div>
+              <div style="background:rgba(167,139,250,0.6);border-radius:3px;width:12px;height:45%"></div>
+              <div style="margin-left:auto;font-size:0.65rem;color:#a78bfa;font-weight:700;align-self:center">CRUD</div>
+            </div>
+          </div>
+          <div class="card-body" style="padding-top:12px">
+            <div class="card-title">Django CRUD API</div>
+            <div class="card-category">REST API · Backend</div>
+            <div class="card-desc">CRUD operations built using Django REST Framework with secure endpoints.</div>
+          </div>
+          <div class="tag-cloud">
+            <span class="tag tag-purple">Python</span>
+            <span class="tag tag-pink">Django</span>
+            <span class="tag tag-blue">DRF</span>
+            <span class="tag tag-yellow">SQLite</span>
+          </div>
+          <p class="view-hint">👆 Click to view details</p>
+          <div class="card-links-row">
+            <a href="https://github.com/fardin-05/Django" target="_blank" onclick="event.stopPropagation()" class="clk clk-gh">🔗 GitHub</a>
+          </div>
+        </div>
+
+        <!-- Card: JWT Authentication -->
+        <div class="project-card" onclick="openModal('jwt')" data-aos="fade-up" data-aos-delay="400">
+          <div class="card-glow" style="background:linear-gradient(135deg,#10b981,#3b82f6)"></div>
+          <div class="card-visual">
+            <div style="background:rgba(16,185,129,0.1);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px;">
+              <div style="width:36px;height:36px;border-radius:50%;border:3px solid #10b981;display:flex;align-items:center;justify-content:center;font-size:1.1rem">🔐</div>
+              <div style="flex:1">
+                <div style="height:6px;background:rgba(16,185,129,0.2);border-radius:999px;overflow:hidden">
+                  <div style="height:100%;width:92%;background:linear-gradient(90deg,#10b981,#059669);border-radius:999px"></div>
+                </div>
+                <div style="font-size:0.65rem;color:#6ee7b7;font-weight:700;margin-top:3px">Security: 92%</div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body" style="padding-top:12px">
+            <div class="card-title">JWT Authentication</div>
+            <div class="card-category">Auth System · Security</div>
+            <div class="card-desc">Secure auth system built with Django REST Framework and JWT tokens.</div>
+          </div>
+          <div class="tag-cloud">
+            <span class="tag tag-green">Django</span>
+            <span class="tag tag-blue">JWT</span>
+            <span class="tag tag-sky">DRF</span>
+            <span class="tag tag-orange">PostgreSQL</span>
+          </div>
+          <p class="view-hint">👆 Click to view details</p>
+          <div class="card-links-row">
+            <a href="https://github.com/fardin-05/JWT-Authentication" target="_blank" onclick="event.stopPropagation()" class="clk clk-gh">🔗 GitHub</a>
+          </div>
+        </div>
+
+        <!-- Card: Library Management API -->
+        <div class="project-card" onclick="openModal('library')" data-aos="fade-up" data-aos-delay="500">
+          <div class="card-glow" style="background:linear-gradient(135deg,#3b82f6,#818cf8)"></div>
+          <div class="card-visual">
+            <div style="background:rgba(59,130,246,0.1);border-radius:10px;padding:8px 12px;display:flex;align-items:flex-end;gap:3px;height:48px;">
+              <div style="width:14px;height:80%;background:#1d4ed8;border-radius:3px"></div>
+              <div style="width:11px;height:55%;background:#3b82f6;border-radius:3px"></div>
+              <div style="width:16px;height:100%;background:#1e3a8a;border-radius:3px"></div>
+              <div style="width:10px;height:50%;background:#60a5fa;border-radius:3px"></div>
+              <div style="width:13px;height:70%;background:#2563eb;border-radius:3px"></div>
+              <div style="width:9px;height:40%;background:#93c5fd;border-radius:3px"></div>
+              <div style="margin-left:auto;font-size:0.9rem;align-self:center">📚</div>
+            </div>
+          </div>
+          <div class="card-body" style="padding-top:12px">
+            <div class="card-title">Library Management API</div>
+            <div class="card-category">Management System · API</div>
+            <div class="card-desc">Manages authors, books, categories, and borrowing records.</div>
+          </div>
+          <div class="tag-cloud">
+            <span class="tag tag-blue">Django</span>
+            <span class="tag tag-sky">DRF</span>
+            <span class="tag tag-green">SQLite</span>
+          </div>
+          <p class="view-hint">👆 Click to view details</p>
+          <div class="card-links-row">
+            <a href="https://github.com/fardin-05/Library_Management_System" target="_blank" onclick="event.stopPropagation()" class="clk clk-gh">🔗 GitHub</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Modal -->
+  <div id="project-modal" role="dialog" aria-modal="true">
+    <div class="modal-box" id="modal-box">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
 
   <!-- About -->
-  <section id="about" class="py-20 bg-white text-gray-900">
+  <section id="about" class="py-20 glass-section">
     <div class="container mx-auto px-6 flex flex-col md:flex-row items-center md:space-x-8">
       <div class="md:w-1/3 mb-8 md:mb-0">
         <img src="images/portfoolio logo.jpg" alt="Fardin Khan" class="rounded-full w-48 h-48 mx-auto object-cover shadow-lg border-4 border-yellow-400">
       </div>
       <div class="md:w-2/3 text-center md:text-left">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6">আমার সম্পর্কে</h2>
-        <p class="text-base md:text-lg mb-4">
-          আমি ইউজারদের জন্য অদৃশ্য কিন্তু গুরুত্বপূর্ণ আর্কিটেকচার তৈরি করতে ভালোবাসি। বিশেষ করে <strong>Django</strong>-এর শক্তি ও নিরাপত্তা আমাকে অনুপ্রাণিত করে। ক্লিন কোড, টেস্টিং এবং স্কেলেবল সিস্টেম আমার কাজের মূল ফোকাস।
-        </p>
-        <p class="text-base md:text-lg">
-          আমি এমন একটি টিমে কাজ করতে চাই যেখানে <strong>Django/Python</strong> দিয়ে বড় প্রজেক্টের backend design করতে পারব।
-        </p>
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
+        <p class="text-base md:text-lg mb-4" style="color:rgba(255,255,255,0.8)">
+I am passionate about creating invisible but important architectures for users. I am especially inspired by the power and security of <strong>Django</strong>. Clean code, testing, and scalable systems are the main focus of my work.
+</p>
+<p class="text-base md:text-lg" style="color:rgba(255,255,255,0.8)">
+I would like to work in a team where I can design the backend of large projects with <strong>Django/Python</strong>.
+</p>
       </div>
     </div>
   </section>
 
   <!-- Resume -->
-  <section id="resume" class="py-20 bg-gray-900 text-center">
-    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-green-400">📄 Resume </h2>
-    <p class="text-gray-400 mb-8 text-base md:text-lg">Want to explore my experience and education in detail?</p>
+  <section id="resume" class="py-20 glass-light text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-green-400">📄 Resume</h2>
+    <p class="mb-8 text-base md:text-lg section-sub">Want to explore my experience and education in detail?</p>
     <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
       <a href="images/Fardin_Khan_Resume.pdf" target="_blank" class="btn-glow">⬇️ Download CV (PDF)</a>
       <a href="images/Fardin_Khan_Resume.pdf" target="_blank" class="btn-glow">🔍 View Online</a>
     </div>
   </section>
-  <!-- 🌟 Education Section -->
-<section id="education" class="bg-gradient-to-b from-gray-900 to-gray-800 text-white py-20 px-6">
-  <div class="max-w-5xl mx-auto text-center mb-12" data-aos="fade-down">
-    <h2 class="text-4xl font-bold mb-4 text-yellow-400">🎓 Education</h2>
-    <p class="text-gray-300 text-lg">My academic milestones that shaped my technical journey.</p>
-  </div>
 
-  <div class="space-y-12 max-w-4xl mx-auto">
-    <div class="relative bg-gray-800 border-l-4 border-yellow-400 rounded-xl p-6 hover:shadow-[0_0_25px_#facc15] transition-all duration-300" data-aos="fade-right">
-      <div class="absolute -left-3 top-6 w-6 h-6 bg-yellow-400 rounded-full shadow-lg animate-pulse"></div>
-      <h3 class="text-2xl font-semibold text-yellow-300">Diploma Engineering in Computer Science & Technology</h3>
-      <p class="text-gray-400 italic">DR MAHBUBUR RAHMAN MOLLAH INSTITUTE OF SCIENCE & TECHNOLOGY — 2021 - 2026 (Present)</p>
-      <p class="mt-3 text-gray-300">Focused on software development, AI, and web technologies with hands-on experience in modern frameworks.</p>
+  <!-- Education - Iconic & Stylish -->
+  <section id="education" class="py-20 px-6 glass-section">
+    <div class="max-w-5xl mx-auto text-center mb-16" data-aos="fade-down">
+      <h2 class="text-4xl font-bold mb-4 text-yellow-400">🎓 Education</h2>
+      <p class="section-sub text-lg">My academic milestones that shaped my technical journey.</p>
     </div>
-    <div class="relative bg-gray-800 border-l-4 border-yellow-400 rounded-xl p-6 hover:shadow-[0_0_25px_#facc15] transition-all duration-300" data-aos="fade-right">
-  <div class="absolute -left-3 top-6 w-6 h-6 bg-yellow-400 rounded-full shadow-lg animate-pulse"></div>
-  <h3 class="text-2xl font-semibold text-yellow-300">Industrial Attachment in Python with Django</h3>
-    <p class="text-gray-400 italic">BD Calling IT Ltd. </p>
-  <p class="text-gray-400 italic">Industrial Attachment Period: September 2025 – November 2025 (3 Months)</p>
-  <p class="mt-3 text-gray-300">Worked with real-world Django projects including REST API development, authentication, database design, and deployment workflow.</p>
- </div>
-    <div class="relative bg-gray-800 border-l-4 border-yellow-400 rounded-xl p-6 hover:shadow-[0_0_25px_#facc15] transition-all duration-300" data-aos="fade-right">
-      <div class="absolute -left-3 top-6 w-6 h-6 bg-yellow-400 rounded-full shadow-lg animate-pulse"></div>
-      <h3 class="text-2xl font-semibold text-yellow-300">Secondary School Certificate (SSC)</h3>
-        <p class="text-gray-400 italic">MANNAN HIGH SCHOOL & COLLEGE</p>
-      <p class="text-gray-400 italic">Science Group — 2019 - 2021 (Passed)</p>
-      <p class="mt-3 text-gray-300">Discovered passion for coding and design while leading school-level tech projects.</p>
+
+    <div class="max-w-3xl mx-auto edu-timeline space-y-10">
+
+      <!-- Card 1: Diploma -->
+      <div class="edu-card" data-aos="fade-right">
+        <div class="edu-dot"></div>
+        <span class="edu-icon">🖥️</span>
+        <div class="edu-badge edu-badge-diploma">🎓 Diploma · Completed</div>
+        <div class="edu-title">Diploma Engineering in Computer Science & Technology</div>
+        <div class="edu-institute">DR MAHBUBUR RAHMAN MOLLAH INSTITUTE OF SCIENCE & TECHNOLOGY</div>
+        <div class="edu-period">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 11H7v-2h4V7h2v6z"/></svg>
+          2021 – 2026 (Passed)
+        </div>
+        <div class="edu-desc">Focused on software development, AI, and web technologies with hands-on experience in modern frameworks.</div>
+        <div class="edu-tags">
+          <span class="edu-tag" style="background:rgba(168,85,247,0.15);color:#c084fc;border:1px solid rgba(168,85,247,0.4)">Programming Language</span>
+          <span class="edu-tag" style="background:rgba(59,130,246,0.15);color:#93c5fd;border:1px solid rgba(59,130,246,0.4)">Database</span>
+          <span class="edu-tag" style="background:rgba(16,185,129,0.15);color:#6ee7b7;border:1px solid rgba(16,185,129,0.4)">AI/ML</span>
+          <span class="edu-tag" style="background:rgba(250,204,21,0.15);color:#fde68a;border:1px solid rgba(250,204,21,0.4)">Networking</span>
+          <span class="edu-tag" style="background:rgba(244,114,182,0.15);color:#f9a8d4;border:1px solid rgba(244,114,182,0.4)">Computer Fundamentals</span>
+      
+        </div>
+      </div>
+
+      <!-- Card 2: Industrial Attachment -->
+      <div class="edu-card" data-aos="fade-right" data-aos-delay="100">
+        <div class="edu-dot" style="background:linear-gradient(135deg,#22d3ee,#3b82f6);box-shadow:0 0 0 4px rgba(34,211,238,0.2),0 0 16px rgba(34,211,238,0.5)"></div>
+        <span class="edu-icon">🏢</span>
+        <div class="edu-badge edu-badge-internship">💼 Industrial Attachment · Completed</div>
+        <div class="edu-title">Industrial Attachment in Python with Django</div>
+        <div class="edu-institute">BD Calling IT Ltd.</div>
+        <div class="edu-period">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 11H7v-2h4V7h2v6z"/></svg>
+          September 2025 – November 2025 · 3 Months
+        </div>
+        <div class="edu-desc">Worked with real-world Django projects including REST API development, authentication, database design, and deployment workflow.</div>
+        <div class="edu-tags">
+          <span class="edu-tag" style="background:rgba(34,211,238,0.15);color:#67e8f9;border:1px solid rgba(34,211,238,0.4)">Python</span>
+          <span class="edu-tag" style="background:rgba(168,85,247,0.15);color:#c084fc;border:1px solid rgba(168,85,247,0.4)">Django</span>
+          <span class="edu-tag" style="background:rgba(59,130,246,0.15);color:#93c5fd;border:1px solid rgba(59,130,246,0.4)">REST API</span>
+          <span class="edu-tag" style="background:rgba(251,146,60,0.15);color:#fdba74;border:1px solid rgba(251,146,60,0.4)">DRF</span>
+          <span class="edu-tag" style="background:rgba(16,185,129,0.15);color:#6ee7b7;border:1px solid rgba(16,185,129,0.4)">PostgreSQL</span>
+          <span class="edu-tag" style="background:rgba(244,114,182,0.15);color:#f9a8d4;border:1px solid rgba(244,114,182,0.4)">Deployment</span>
+        </div>
+      </div>
+
+      <!-- Card 3: SSC -->
+      <div class="edu-card" data-aos="fade-right" data-aos-delay="200">
+        <div class="edu-dot" style="background:linear-gradient(135deg,#facc15,#22d3ee);box-shadow:0 0 0 4px rgba(250,204,21,0.2),0 0 16px rgba(250,204,21,0.5)"></div>
+        <span class="edu-icon">📚</span>
+        <div class="edu-badge edu-badge-ssc">🏫 SSC · Passed</div>
+        <div class="edu-title">Secondary School Certificate (SSC)</div>
+        <div class="edu-institute">MANNAN HIGH SCHOOL & COLLEGE</div>
+        <div class="edu-period">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 11H7v-2h4V7h2v6z"/></svg>
+          2019 – 2021 · Science Group
+        </div>
+        <div class="edu-desc">Discovered passion for coding and design while leading school-level tech projects.</div>
+        <div class="edu-tags">
+          <span class="edu-tag" style="background:rgba(250,204,21,0.15);color:#fde68a;border:1px solid rgba(250,204,21,0.4)">Science</span>
+          <span class="edu-tag" style="background:rgba(168,85,247,0.15);color:#c084fc;border:1px solid rgba(168,85,247,0.4)">Math</span>
+          <span class="edu-tag" style="background:rgba(16,185,129,0.15);color:#6ee7b7;border:1px solid rgba(16,185,129,0.4)">Physics</span>
+        </div>
+      </div>
+
     </div>
-  </div>
-</section>
+  </section>
 
-
-   <!-- Contact -->
-  <section id="contact" class="py-20 bg-gray-100 text-gray-900">
+  <!-- Contact -->
+  <section id="contact" class="py-20 glass-light">
     <div class="container mx-auto px-6">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-gray-800">📬 Let’s Connect</h2>
-      <p class="text-center text-gray-600 mb-8">Have any questions or want to work together? Connect with me!</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-6">📬 Let's Connect</h2>
+      <p class="text-center mb-8 section-sub">Have any questions or want to work together? Connect with me!</p>
 
-      <!-- 🔗 Social Icons -->
       <div class="flex justify-center space-x-8 mb-10">
-        <a href="https://github.com/fardin-05" target="_blank" class="text-gray-700 hover:text-yellow-500 transition transform hover:scale-110">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.1 3.29 9.42 7.86 10.94.58.1.79-.25.79-.55v-2c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.68-1.27-1.68-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.77 2.7 1.26 3.36.97.1-.75.4-1.26.73-1.54-2.56-.3-5.26-1.28-5.26-5.68 0-1.26.45-2.28 1.18-3.08-.12-.3-.51-1.53.1-3.18 0 0 .96-.31 3.15 1.18a10.8 10.8 0 0 1 2.87-.38c.97 0 1.95.13 2.87.38 2.18-1.49 3.14-1.18 3.14-1.18.61 1.65.23 2.88.12 3.18.73.8 1.18 1.82 1.18 3.08 0 4.42-2.7 5.38-5.27 5.67.41.36.78 1.05.78 2.13v3.15c0 .3.21.65.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.74 18.27.5 12 .5z"/>
-          </svg>
+        <a href="https://github.com/fardin-05" target="_blank" class="hover:text-yellow-400 transition transform hover:scale-110">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.73.5.5 5.74.5 12.02c0 5.1 3.29 9.42 7.86 10.94.58.1.79-.25.79-.55v-2c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.68-1.27-1.68-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.77 2.7 1.26 3.36.97.1-.75.4-1.26.73-1.54-2.56-.3-5.26-1.28-5.26-5.68 0-1.26.45-2.28 1.18-3.08-.12-.3-.51-1.53.1-3.18 0 0 .96-.31 3.15 1.18a10.8 10.8 0 0 1 2.87-.38c.97 0 1.95.13 2.87.38 2.18-1.49 3.14-1.18 3.14-1.18.61 1.65.23 2.88.12 3.18.73.8 1.18 1.82 1.18 3.08 0 4.42-2.7 5.38-5.27 5.67.41.36.78 1.05.78 2.13v3.15c0 .3.21.65.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.74 18.27.5 12 .5z"/></svg>
         </a>
-
-        <a href="https://www.linkedin.com/in/fardin-khan-7726062a9/" target="_blank" class="text-gray-700 hover:text-blue-600 transition transform hover:scale-110">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M20.45 20.45h-3.55v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.4-2.07 2.85v5.5h-3.55V9h3.4v1.56h.05c.47-.89 1.62-1.82 3.34-1.82 3.58 0 4.24 2.36 4.24 5.42v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.23 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.2.8 24 1.77 24h20.46A1.77 1.77 0 0 0 24 22.25V1.75C24 .78 23.2 0 22.23 0z"/>
-          </svg>
+        <a href="https://www.linkedin.com/in/fardin-khan-7726062a9/" target="_blank" class="hover:text-blue-400 transition transform hover:scale-110">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.4-2.07 2.85v5.5h-3.55V9h3.4v1.56h.05c.47-.89 1.62-1.82 3.34-1.82 3.58 0 4.24 2.36 4.24 5.42v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.23 0H1.77C.8 0 0 .78 0 1.75v20.5C0 23.2.8 24 1.77 24h20.46A1.77 1.77 0 0 0 24 22.25V1.75C24 .78 23.2 0 22.23 0z"/></svg>
         </a>
-
-        <a href="mailto:fardinazim7@gmail.com" class="text-gray-700 hover:text-red-500 transition transform hover:scale-110">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 13.065L.5 6.75V18.5A1.5 1.5 0 0 0 2 20h20a1.5 1.5 0 0 0 1.5-1.5V6.75l-11.5 6.315zm0-2.13L22.5 5.5H1.5L12 10.935z"/>
-          </svg>
+        <a href="mailto:fardinazim7@gmail.com" class="hover:text-red-400 transition transform hover:scale-110">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 13.065L.5 6.75V18.5A1.5 1.5 0 0 0 2 20h20a1.5 1.5 0 0 0 1.5-1.5V6.75l-11.5 6.315zm0-2.13L22.5 5.5H1.5L12 10.935z"/></svg>
         </a>
       </div>
 
-    <div class="flex flex-col items-center space-y-6 mb-10">
-  <!-- Phone -->
-  <a href="tel:+8801616247662" class="flex items-center space-x-3 text-gray-700 hover:text-green-500 transition transform hover:scale-110">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.11 5.18 2 2 0 0 1 5.11 3h3a2 2 0 0 1 2 1.72 12.44 12.44 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L9.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.44 12.44 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-    </svg>
-    <span class="font-medium text-lg">+880 1616247662</span>
-  </a>
+      <div class="flex flex-col items-center space-y-4 mb-10">
+        <a href="tel:+8801616247662" class="flex items-center space-x-3 hover:text-green-400 transition transform hover:scale-110">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.11 5.18 2 2 0 0 1 5.11 3h3a2 2 0 0 1 2 1.72 12.44 12.44 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L9.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.44 12.44 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span class="font-medium text-lg">+880 1616247662</span>
+        </a>
+        <a href="https://www.google.com/maps/place/Dhaka,+Bangladesh" target="_blank" class="flex items-center space-x-3 hover:text-purple-400 transition transform hover:scale-110">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+          <span class="font-medium text-lg">Dhaka, Bangladesh</span>
+        </a>
+      </div>
 
-  <!-- Address -->
-  <a href="https://www.google.com/maps/place/Dhaka,+Bangladesh" target="_blank" class="flex items-center space-x-3 text-gray-700 hover:text-purple-600 transition transform hover:scale-110">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/>
-    </svg>
-    <span class="font-medium text-lg">Dhaka, Bangladesh</span>
-  </a>
-</div>
-
-      <!-- 📬 Contact Form -->
-      <form action="https://formspree.io/f/xgvnjbjj" method="POST" class="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
+      <form action="https://formspree.io/f/xgvnjbjj" method="POST" class="max-w-2xl mx-auto glass-card p-8 rounded-2xl">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <input type="text" name="name" placeholder="Your Name" required class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
-          <input type="email" name="email" placeholder="Your Email" required class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
+          <input type="text" name="name" placeholder="Your Name" required class="contact-input">
+          <input type="email" name="email" placeholder="Your Email" required class="contact-input">
         </div>
-        <textarea name="message" rows="5" placeholder="Your Message" required class="w-full mt-6 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"></textarea>
+        <textarea name="message" rows="5" placeholder="Your Message" required class="contact-input mt-6"></textarea>
         <button type="submit" class="btn-glow mt-6">📨 Send Message</button>
       </form>
     </div>
   </section>
 
-
   <!-- Footer -->
-  <footer class="py-6 bg-gray-800 text-center text-gray-400">
+  <footer class="py-6 text-center section-sub" style="background:rgba(0,0,0,0.45);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,0.08)">
     <div>© 2025 Fardin Khan | All Rights Reserved</div>
     <div class="flex justify-center space-x-6 mt-3 flex-wrap">
-      <a href="https://github.com/fardin-05" target="_blank" class="hover:text-white">GitHub</a>
-      <a href="https://www.linkedin.com/in/fardin-khan-7726062a9/" target="_blank" class="hover:text-white">LinkedIn</a>
-      <a href="mailto:fardinazim7@gmail.com" class="hover:text-white">Email</a>
+      <a href="https://github.com/fardin-05" target="_blank" class="hover:text-white transition">GitHub</a>
+      <a href="https://www.linkedin.com/in/fardin-khan-7726062a9/" target="_blank" class="hover:text-white transition">LinkedIn</a>
+      <a href="mailto:fardinazim7@gmail.com" class="hover:text-white transition">Email</a>
     </div>
-     <div class="text-center mt-10">
-  <a href="https://buymeacoffee.com/ko-fi-alternative" target="_blank" 
-     class="inline-flex items-center gap-2 px-6 py-3 bg-yellow-400 text-gray-900 font-semibold rounded-full shadow-md hover:bg-yellow-500 transform hover:scale-105 transition duration-300">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M19 3H5a2 2 0 0 0-2 2v14a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3h2a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3zm-1 14H6V6h12v11zm2-3h-1V8h1a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1z"/>
-    </svg>
-    Buy Me a Coffee
-  </a>
-</div>
+    <div class="text-center mt-6">
+      <a href="https://buymeacoffee.com/ko-fi-alternative" target="_blank"
+         class="inline-flex items-center gap-2 px-6 py-3 bg-yellow-400 text-gray-900 font-semibold rounded-full shadow-md hover:bg-yellow-500 transform hover:scale-105 transition duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3h2a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3zm-1 14H6V6h12v11zm2-3h-1V8h1a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1z"/></svg>
+        Buy Me a Coffee
+      </a>
+    </div>
   </footer>
 
   <!-- JS: Scroll Progress -->
-<script>
+  <script>
     window.addEventListener('scroll', () => {
-      const scrollTop = document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (scrollTop / height) * 100;
-      document.getElementById("progressBar").style.width = scrolled + "%";
+      const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById("progressBar").style.width = (document.documentElement.scrollTop / h * 100) + "%";
     });
   </script>
 
   <!-- JS: Scroll Reveal -->
   <script>
-    ScrollReveal().reveal('section', {
-      delay: 200,
-      distance: '80px',
-      origin: 'bottom',
-      duration: 1000,
-      easing: 'ease-in-out',
-      reset: true
-    });
+    ScrollReveal().reveal('section', { delay: 200, distance: '80px', origin: 'bottom', duration: 1000, easing: 'ease-in-out', reset: true });
   </script>
 
-  <!-- JS: Responsive Cursor Spark -->
+  <!-- JS: Cursor Spark - Fixed to work everywhere including over all elements -->
   <script>
+    const sparkColors = ['#facc15', '#a855f7', '#22d3ee', '#fb7185', '#4ade80'];
     function createSpark(x, y) {
       const spark = document.createElement('div');
       spark.classList.add('spark');
-
-      const colors = ['#facc15', '#a855f7', '#22d3ee', '#fb7185'];
-      spark.style.background = `radial-gradient(circle, ${colors[Math.floor(Math.random()*colors.length)]}, transparent 70%)`;
-
-      spark.style.left = x + 'px';
-      spark.style.top = y + 'px';
-
+      const color = sparkColors[Math.floor(Math.random() * sparkColors.length)];
+      spark.style.cssText = `
+        position: fixed;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 999999;
+        left: ${x}px;
+        top: ${y}px;
+        background: radial-gradient(circle, ${color}, transparent 70%);
+        box-shadow: 0 0 6px ${color};
+        animation: fadeOut 0.8s linear forwards;
+      `;
       document.body.appendChild(spark);
       setTimeout(() => spark.remove(), 800);
     }
-
-    document.addEventListener('mousemove', (e) => {
-      createSpark(e.pageX, e.pageY);
+    // Use fixed position (clientX/Y) so sparks appear correctly on screen
+    document.addEventListener('mousemove', e => createSpark(e.clientX, e.clientY), { passive: true });
+    document.addEventListener('touchmove', e => {
+      for (let t of e.touches) createSpark(t.clientX, t.clientY);
+    }, { passive: true });
+    document.addEventListener('click', e => {
+      for (let i = 0; i < 6; i++) {
+        setTimeout(() => createSpark(
+          e.clientX + (Math.random() - 0.5) * 24,
+          e.clientY + (Math.random() - 0.5) * 24
+        ), i * 55);
+      }
     });
-
-    document.addEventListener('touchmove', (e) => {
-      for (let i = 0; i < e.touches.length; i++) {
-        createSpark(e.touches[i].pageX, e.touches[i].pageY);
+    document.addEventListener('touchstart', e => {
+      for (let t of e.touches) {
+        for (let i = 0; i < 4; i++) {
+          setTimeout(() => createSpark(
+            t.clientX + (Math.random() - 0.5) * 20,
+            t.clientY + (Math.random() - 0.5) * 20
+          ), i * 55);
+        }
       }
     }, { passive: true });
   </script>
-  <!-- ✅ AOS Script -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  AOS.init({
-    duration: 400,
-    once: false 
-  });
-</script>
-<script>
-  // Logo info toggle (for all screens)
-  const logo = document.getElementById('logo');
-  const info = document.getElementById('logo-info');
-  logo.addEventListener('click', () => {
-    info.classList.toggle('hidden');
-  });
 
-  // Mobile menu toggle
-  const menuBtn = document.getElementById('menu-btn');
-  const menu = document.getElementById('menu');
-  menuBtn.addEventListener('click', () => {
-    menu.classList.toggle('hidden');
-    menu.classList.toggle('flex');
-    menu.classList.add('animate-fadeIn');
-  });
-</script>
+  <!-- JS: Project Modal -->
+  <script>
+    const projectData = {
+      crud: {
+        title: 'Django CRUD API', category: 'REST API · Backend', color: '#c084fc', icon: '🔄',
+        desc: 'Full CRUD operations built using Django REST Framework with secure endpoints, structured serializers, and clean URL routing.',
+        stats: ['🔗 CRUD Endpoints', '🔒 Secure Auth', '📦 Serializers', '🗃️ SQLite DB'],
+        tags: [['Python','#c084fc','rgba(168,85,247,0.2)','#a855f7'],['Django','#6ee7b7','rgba(16,185,129,0.2)','#10b981'],['DRF','#93c5fd','rgba(59,130,246,0.2)','#3b82f6'],['SQLite','#fde68a','rgba(250,204,21,0.2)','#facc15'],['REST API','#f9a8d4','rgba(244,114,182,0.2)','#f472b6']],
+        github: 'https://github.com/fardin-05/Django', live: null
+      },
+      jwt: {
+        title: 'JWT Authentication', category: 'Auth System · Security', color: '#6ee7b7', icon: '🔐',
+        desc: 'Secure token-based authentication using Django REST Framework and JSON Web Tokens. Includes access & refresh token flow and protected endpoints.',
+        stats: ['🔑 JWT Tokens', '🛡️ Refresh Flow', '👤 Custom User', '🔒 Protected Routes'],
+        tags: [['Django','#6ee7b7','rgba(16,185,129,0.2)','#10b981'],['JWT','#93c5fd','rgba(59,130,246,0.2)','#3b82f6'],['DRF','#7dd3fc','rgba(56,189,248,0.2)','#38bdf8'],['PostgreSQL','#fdba74','rgba(251,146,60,0.2)','#fb923c']],
+        github: 'https://github.com/fardin-05/JWT-Authentication', live: null
+      },
+      library: {
+        title: 'Library Management API', category: 'Management System · API', color: '#93c5fd', icon: '📚',
+        desc: 'DRF-based backend managing authors, books, categories, and borrowing records with full CRUD support.',
+        stats: ['📖 Book Records', '👥 Author Mgmt', '🔄 Borrow Tracking', '🗂️ Categories'],
+        tags: [['Django','#93c5fd','rgba(59,130,246,0.2)','#3b82f6'],['DRF','#7dd3fc','rgba(56,189,248,0.2)','#38bdf8'],['SQLite','#6ee7b7','rgba(16,185,129,0.2)','#10b981']],
+        github: 'https://github.com/fardin-05/Library_Management_System', live: null
+      },
+      ecommerce: {
+        title: 'E-commerce REST API', category: 'E-commerce · Full Backend', color: '#fca5a5', icon: '🛒',
+        desc: 'Complete e-commerce backend with Cart, Product, and Order management. Deployed on Vercel. Payment gateway with Stripe/SSL coming soon.',
+        stats: ['🛍️ Cart & Orders', '📦 Product Mgmt', '💳 Payment Ready', '🌐 Live Deployed'],
+        tags: [['Django','#fca5a5','rgba(248,113,113,0.2)','#f87171'],['DRF','#93c5fd','rgba(59,130,246,0.2)','#3b82f6'],['JWT','#fdba74','rgba(251,146,60,0.2)','#fb923c'],['PostgreSQL','#7dd3fc','rgba(56,189,248,0.2)','#38bdf8'],['Vercel','#fde68a','rgba(250,204,21,0.2)','#facc15']],
+        github: 'https://github.com/fardin-05/Phimart', live: 'https://phimart-chi.vercel.app/api/auth/'
+      },
+      blog: {
+        title: 'Django Blog Website', category: 'Web App · Full Stack', color: '#c084fc', icon: '✍️',
+        desc: 'A full-stack blog app where admins and writers can create, edit, and delete posts. Readers get a clean interface. More features planned.',
+        stats: ['📝 Post CRUD', '👤 Admin Panel', '🎨 Clean UI', '🌐 Live on Render'],
+        tags: [['Django','#c084fc','rgba(168,85,247,0.2)','#a855f7'],['HTML/CSS','#f9a8d4','rgba(244,114,182,0.2)','#f472b6'],['SQLite','#6ee7b7','rgba(16,185,129,0.2)','#10b981'],['Render','#7dd3fc','rgba(56,189,248,0.2)','#38bdf8']],
+        github: 'https://github.com/fardin-05/Blog', live: 'https://blog-18kw.onrender.com'
+      },
+      blood: {
+        title: 'Blood Bank REST API', category: 'Healthcare · Backend API', color: '#fca5a5', icon: '🩸',
+        desc: 'Backend for managing blood donors, requests, stock levels, and user roles. Secured with JWT authentication. Deployed on Render.',
+        stats: ['🩸 Donor Mgmt', '📦 Blood Stock', '🔐 Role-based Auth', '🌐 Live on Render'],
+        tags: [['Django','#fca5a5','rgba(248,113,113,0.2)','#f87171'],['DRF','#93c5fd','rgba(59,130,246,0.2)','#3b82f6'],['JWT','#fdba74','rgba(251,146,60,0.2)','#fb923c'],['PostgreSQL','#7dd3fc','rgba(56,189,248,0.2)','#38bdf8'],['Render','#f9a8d4','rgba(244,114,182,0.2)','#f472b6']],
+        github: 'https://github.com/fardin-05/Blood_Bank_Back_end', live: 'https://blood-bank-back-end.onrender.com'
+      },
+      friendsbook: {
+        title: 'Friends Book', category: 'Social Platform · Full Backend', color: '#93c5fd', icon: '👥',
+        desc: 'A social media platform with user profiles, personal feed/timeline, post create/edit/delete with ownership control, and user-to-user messaging system.',
+        stats: ['👤 User Profiles', '📰 Feed & Timeline', '✏️ Post Ownership', '💬 Messaging System'],
+        tags: [['Django','#93c5fd','rgba(59,130,246,0.2)','#3b82f6'],['MVT','#7dd3fc','rgba(56,189,248,0.2)','#38bdf8'],['HTML','#fdba74','rgba(251,146,60,0.2)','#fb923c'],['CSS','#7dd3fc','rgba(56,189,248,0.2)','#38bdf8'],['JavaScript','#fde68a','rgba(250,204,21,0.2)','#facc15'],['SQLite','#6ee7b7','rgba(16,185,129,0.2)','#10b981'],['Render','#c084fc','rgba(168,85,247,0.2)','#a855f7']],
+        github: 'https://github.com/fardin-05/Friends_Book', live: 'https://friends-book-nefr.onrender.com/'
+      },
+    };
 
-<!-- Optional small animation -->
-<style>
-@keyframes fadeIn {
-  from {opacity: 0; transform: translateY(-10px);}
-  to {opacity: 1; transform: translateY(0);}
-}
-.animate-fadeIn {
-  animation: fadeIn 0.3s ease-in-out;
-}
-</style>
+    function openModal(key) {
+      const p = projectData[key]; if (!p) return;
+      const tagsHtml = p.tags.map(([n,c,bg,bc]) =>
+        `<span style="background:${bg};color:${c};border:1.5px solid ${bc};font-size:0.7rem;font-weight:700;padding:3px 10px;border-radius:999px;display:inline-block">${n}</span>`
+      ).join('');
+      const statsHtml = p.stats.map(s => `<div class="modal-stat">${s}</div>`).join('');
+      const linksHtml = [
+        p.github ? `<a href="${p.github}" target="_blank" class="modal-link ml-gh">⬢ View on GitHub</a>` : '',
+        p.live   ? `<a href="${p.live}"   target="_blank" class="modal-link ml-live">🌐 Live Project</a>` : ''
+      ].join('');
+      document.getElementById('modal-content').innerHTML = `
+        <div class="modal-header">
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px">
+            <div style="width:50px;height:50px;border-radius:14px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:1.7rem">${p.icon}</div>
+            <div>
+              <div class="modal-title" style="color:${p.color}">${p.title}</div>
+              <div class="modal-category">${p.category}</div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-body">
+          <p class="modal-desc">${p.desc}</p>
+          <div style="font-size:0.75rem;font-weight:800;color:rgba(255,255,255,0.5);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.06em">⚙️ Features</div>
+          <div class="modal-stats">${statsHtml}</div>
+          <div style="font-size:0.75rem;font-weight:800;color:rgba(255,255,255,0.5);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.06em">🏷️ Tech Stack</div>
+          <div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px">${tagsHtml}</div>
+          <div class="modal-links">${linksHtml}</div>
+        </div>`;
+      document.getElementById('project-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      document.getElementById('project-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('project-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  </script>
+
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init({ duration: 400, once: false });</script>
+
+  <!-- Navbar JS -->
+  <script>
+    document.getElementById('logo').addEventListener('click', () => document.getElementById('logo-info').classList.toggle('hidden'));
+    const menuBtn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu');
+    const overlay = document.getElementById('overlay');
+    menuBtn.addEventListener('click', () => {
+      menu.classList.toggle('hidden'); menu.classList.toggle('flex');
+      menu.classList.add('animate-fadeIn'); overlay.classList.toggle('hidden');
+    });
+    overlay.addEventListener('click', () => { menu.classList.add('hidden'); overlay.classList.add('hidden'); });
+    document.querySelectorAll('#menu a').forEach(a => a.addEventListener('click', () => {
+      menu.classList.add('hidden'); overlay.classList.add('hidden');
+    }));
+  </script>
 
 </body>
 </html>
